@@ -1101,7 +1101,87 @@
             font-size: 0.875rem;
         }
 
+        /* Print and Save Buttons */
+        .print-save-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .print-btn, .save-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .print-btn:hover, .save-btn:hover {
+            background: #f9fafb;
+            transform: translateY(-2px);
+        }
+
+        .print-btn i, .save-btn i {
+            color: var(--primary);
+        }
+
+        /* Print Styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            
+            .print-section, .print-section * {
+                visibility: visible;
+            }
+            
+            .print-section {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+            
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+            
+            .btn, .sidebar, .header, .quick-actions, .subject-tabs, .print-save-buttons {
+                display: none !important;
+            }
+        }
+
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            .header {
+                padding: 12px 16px;
+            }
+            
+            .page-title {
+                font-size: 1.25rem;
+            }
+            
+            .content-section {
+                padding: 16px;
+            }
+            
+            .card-body {
+                padding: 16px;
+            }
+            
             .countdown-display {
                 font-size: 1.8rem;
             }
@@ -1122,11 +1202,53 @@
             .subject-tabs {
                 flex-direction: column;
             }
+            
+            .subject-tab {
+                text-align: center;
+            }
+            
+            .partner-task-grid, .partners-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .topic-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .topic-checkbox {
+                margin-bottom: 10px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stat-value {
+                font-size: 1.8rem;
+            }
+            
+            .quick-actions, .print-save-buttons {
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
             .countdown-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions, .print-save-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .quick-action-btn, .print-btn, .save-btn {
+                justify-content: center;
             }
         }
     </style>
@@ -1531,7 +1653,17 @@
                 
                 <!-- Civil Proceedings -->
                 <div class="subject-content active" id="civil-content">
-                    <div class="card">
+                    <div class="print-save-buttons">
+                        <button class="print-btn" onclick="printSubject('civil')">
+                            <i class="fas fa-print"></i>
+                            <span>Print Civil Proceedings</span>
+                        </button>
+                        <button class="save-btn" onclick="saveSubject('civil')">
+                            <i class="fas fa-save"></i>
+                            <span>Save Civil Proceedings</span>
+                        </button>
+                    </div>
+                    <div class="card print-section">
                         <div class="card-header">
                             <h2 class="card-title"><i class="fas fa-gavel"></i> Civil Proceedings</h2>
                         </div>
@@ -1545,7 +1677,17 @@
 
                 <!-- Corporate Practice -->
                 <div class="subject-content" id="corporate-content">
-                    <div class="card">
+                    <div class="print-save-buttons">
+                        <button class="print-btn" onclick="printSubject('corporate')">
+                            <i class="fas fa-print"></i>
+                            <span>Print Corporate Practice</span>
+                        </button>
+                        <button class="save-btn" onclick="saveSubject('corporate')">
+                            <i class="fas fa-save"></i>
+                            <span>Save Corporate Practice</span>
+                        </button>
+                    </div>
+                    <div class="card print-section">
                         <div class="card-header">
                             <h2 class="card-title"><i class="fas fa-briefcase"></i> Corporate & Commercial Practice</h2>
                         </div>
@@ -1559,7 +1701,17 @@
 
                 <!-- Family Law -->
                 <div class="subject-content" id="family-content">
-                    <div class="card">
+                    <div class="print-save-buttons">
+                        <button class="print-btn" onclick="printSubject('family')">
+                            <i class="fas fa-print"></i>
+                            <span>Print Family Law</span>
+                        </button>
+                        <button class="save-btn" onclick="saveSubject('family')">
+                            <i class="fas fa-save"></i>
+                            <span>Save Family Law</span>
+                        </button>
+                    </div>
+                    <div class="card print-section">
                         <div class="card-header">
                             <h2 class="card-title"><i class="fas fa-heart"></i> Family Law Practice</h2>
                         </div>
@@ -1573,7 +1725,17 @@
 
                 <!-- Criminal Proceedings -->
                 <div class="subject-content" id="criminal-content">
-                    <div class="card">
+                    <div class="print-save-buttons">
+                        <button class="print-btn" onclick="printSubject('criminal')">
+                            <i class="fas fa-print"></i>
+                            <span>Print Criminal Proceedings</span>
+                        </button>
+                        <button class="save-btn" onclick="saveSubject('criminal')">
+                            <i class="fas fa-save"></i>
+                            <span>Save Criminal Proceedings</span>
+                        </button>
+                    </div>
+                    <div class="card print-section">
                         <div class="card-header">
                             <h2 class="card-title"><i class="fas fa-balance-scale"></i> Criminal Proceedings</h2>
                         </div>
@@ -1587,7 +1749,17 @@
 
                 <!-- Land Transactions -->
                 <div class="subject-content" id="land-content">
-                    <div class="card">
+                    <div class="print-save-buttons">
+                        <button class="print-btn" onclick="printSubject('land')">
+                            <i class="fas fa-print"></i>
+                            <span>Print Land Transactions</span>
+                        </button>
+                        <button class="save-btn" onclick="saveSubject('land')">
+                            <i class="fas fa-save"></i>
+                            <span>Save Land Transactions</span>
+                        </button>
+                    </div>
+                    <div class="card print-section">
                         <div class="card-header">
                             <h2 class="card-title"><i class="fas fa-landmark"></i> Land Transactions</h2>
                         </div>
@@ -1903,8 +2075,20 @@
                     <div class="deadline-date">All tasks must be completed by this date</div>
                 </div>
 
+                <!-- Print and Save Buttons for Partner Tasks -->
+                <div class="print-save-buttons">
+                    <button class="print-btn" onclick="printPartnerTasks()">
+                        <i class="fas fa-print"></i>
+                        <span>Print Partner Tasks</span>
+                    </button>
+                    <button class="save-btn" onclick="savePartnerTasks()">
+                        <i class="fas fa-save"></i>
+                        <span>Save Partner Tasks</span>
+                    </button>
+                </div>
+
                 <!-- Partner Task Grid -->
-                <div class="partner-task-grid">
+                <div class="partner-task-grid print-section">
                     <!-- Baluti Bwanika Arthur - Fewest Tasks -->
                     <div class="partner-task-card">
                         <div class="partner-task-card-header bg-civil">
@@ -3197,6 +3381,155 @@
             if (percentText) {
                 percentText.textContent = `${percent}%`;
             }
+        }
+
+        // Print and Save Functions
+        function printSubject(subject) {
+            // Hide all elements except the subject content
+            const subjectContent = document.getElementById(`${subject}-content`);
+            const printSection = subjectContent.querySelector('.print-section');
+            
+            // Create a temporary container for printing
+            const printContainer = document.createElement('div');
+            printContainer.className = 'print-container';
+            printContainer.innerHTML = printSection.outerHTML;
+            
+            // Add print styles
+            const printStyles = document.createElement('style');
+            printStyles.innerHTML = `
+                @media print {
+                    body * {
+                        visibility: hidden;
+                    }
+                    .print-container, .print-container * {
+                        visibility: visible;
+                    }
+                    .print-container {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        padding: 20px;
+                    }
+                    .no-print {
+                        display: none !important;
+                    }
+                    .card {
+                        box-shadow: none;
+                        border: 1px solid #ddd;
+                        page-break-inside: avoid;
+                    }
+                    .btn, .sidebar, .header, .quick-actions, .subject-tabs, .print-save-buttons {
+                        display: none !important;
+                    }
+                }
+            `;
+            
+            document.head.appendChild(printStyles);
+            document.body.appendChild(printContainer);
+            
+            // Print and clean up
+            window.print();
+            
+            document.body.removeChild(printContainer);
+            document.head.removeChild(printStyles);
+        }
+
+        function saveSubject(subject) {
+            const subjectContent = document.getElementById(`${subject}-content`);
+            const printSection = subjectContent.querySelector('.print-section');
+            
+            // Create a blob with the HTML content
+            const blob = new Blob([printSection.outerHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            // Create a download link
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${getSubjectName(subject)} - Study Materials.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert(`${getSubjectName(subject)} materials saved successfully!`);
+        }
+
+        function printPartnerTasks() {
+            // Create a temporary container for printing
+            const printContainer = document.createElement('div');
+            printContainer.className = 'print-container';
+            
+            // Get all partner task cards
+            const partnerTaskCards = document.querySelectorAll('.partner-task-card');
+            partnerTaskCards.forEach(card => {
+                printContainer.appendChild(card.cloneNode(true));
+            });
+            
+            // Add print styles
+            const printStyles = document.createElement('style');
+            printStyles.innerHTML = `
+                @media print {
+                    body * {
+                        visibility: hidden;
+                    }
+                    .print-container, .print-container * {
+                        visibility: visible;
+                    }
+                    .print-container {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        padding: 20px;
+                    }
+                    .no-print {
+                        display: none !important;
+                    }
+                    .card {
+                        box-shadow: none;
+                        border: 1px solid #ddd;
+                        page-break-inside: avoid;
+                    }
+                    .btn, .sidebar, .header, .quick-actions, .subject-tabs, .print-save-buttons {
+                        display: none !important;
+                    }
+                }
+            `;
+            
+            document.head.appendChild(printStyles);
+            document.body.appendChild(printContainer);
+            
+            // Print and clean up
+            window.print();
+            
+            document.body.removeChild(printContainer);
+            document.head.removeChild(printStyles);
+        }
+
+        function savePartnerTasks() {
+            // Get all partner task cards
+            const partnerTaskCards = document.querySelectorAll('.partner-task-card');
+            let htmlContent = '<h1>LIONHUNT PARTNERSHIP - Partner Task Distribution</h1>';
+            
+            partnerTaskCards.forEach(card => {
+                htmlContent += card.outerHTML;
+            });
+            
+            // Create a blob with the HTML content
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            // Create a download link
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'LIONHUNT PARTNERSHIP - Partner Tasks.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('Partner tasks saved successfully!');
         }
 
         // Load saved progress when the app starts
